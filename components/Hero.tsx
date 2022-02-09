@@ -3,13 +3,14 @@ import Image from 'next/image'
 import { useRef, useState } from 'react'
 import { MeatCategory } from '../data/intefaces'
 import { Categories } from '../data/lists'
+import HeroHeader from './HeroHeader'
 import Menu from './Menu'
 
 export default function Hero() {
   const [selectedItem, setSelectedItem] = useState<MeatCategory | null>(null)
 
   return (
-    <motion.div className="relative flex h-screen w-full flex-col bg-[#2C3333]">
+    <motion.div className="relative flex h-screen w-full flex-col bg-[#000]">
       <AnimatePresence>
         {!selectedItem?.video && (
           <motion.div
@@ -20,7 +21,7 @@ export default function Hero() {
               duration: 1,
             }}
             key="heroBg"
-            className="absolute top-0 left-0  h-full w-full bg-[url('https://images.pexels.com/photos/1639561/pexels-photo-1639561.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')] bg-cover bg-center mix-blend-overlay"
+            className="absolute top-0 left-0  h-full w-full bg-[url('/assets/images/hero.jpeg')] bg-cover bg-center mix-blend-screen"
           />
         )}
       </AnimatePresence>
@@ -28,7 +29,7 @@ export default function Hero() {
         {selectedItem?.video && (
           <motion.video
             playsInline
-            animate={{ opacity: 1 }}
+            animate={{ opacity: 0.6 }}
             exit={{ opacity: 0 }}
             initial={{ opacity: 0 }}
             transition={{
@@ -36,38 +37,30 @@ export default function Hero() {
             }}
             key={selectedItem.id}
             autoPlay
+            poster="/assets/images/hero.jpeg"
             loop
             muted
             src={selectedItem.video}
-            className="absolute top-0 left-0 h-full w-full object-cover object-center mix-blend-overlay"
+            className="mix-blend- absolute top-0 left-0 h-full w-full object-cover object-center "
           ></motion.video>
         )}
       </AnimatePresence>
 
-      <div className=" flex h-auto w-full items-center justify-center py-10">
-        <motion.ul className=" flex flex-initial list-none flex-col items-center gap-5 font-Oswald text-base font-thin uppercase text-white sm:flex-row">
-          <motion.li className=" list-item">Home</motion.li>
-          <motion.li className=" list-item">Menu</motion.li>
-          <motion.li className=" list-item">Services</motion.li>
-          <motion.li className=" list-item">
-            <div className="relative  h-32  w-32 bg-clip-content">
-              <Image src={'/assets/images/logo.png'} alt="" layout="fill" />
-            </div>
-          </motion.li>
-          <motion.li className=" list-item">Gallery</motion.li>
-          <motion.li className=" list-item">Contact</motion.li>
-          <motion.li className=" list-item">About</motion.li>
-        </motion.ul>
-      </div>
+      <HeroHeader />
+
       <AnimatePresence>
         {!selectedItem ? (
           <motion.div
             initial={{ opacity: 0, x: -500 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 500 }}
-            transition={{
-              duration: 1,
-              delay: 1,
+            animate={{
+              opacity: 1,
+              x: 0,
+              transition: { duration: 1, delay: 1.5 },
+            }}
+            exit={{
+              opacity: 0,
+              x: 500,
+              transition: { duration: 0.7, delay: 0.5 },
             }}
             className="absolute top-0 left-0 flex h-full w-full items-center justify-center"
           >
@@ -96,7 +89,7 @@ export default function Hero() {
             <div className=" text-center text-white">
               <p className=" font-Cinzel text-4xl">Taste our</p>
               <h1 className="font-CinzelDeco text-9xl">{selectedItem.title}</h1>
-              <p className="max-w-md text-center font-Cinzel">
+              <p className="mx-auto max-w-md text-center font-Cinzel">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim
                 exercitationem laudantium consequuntur commodi qui repellat at
                 dolorum.
@@ -105,25 +98,23 @@ export default function Hero() {
                 <button
                   type="button"
                   title="close"
+                  className="rounded-full border p-5 opacity-40 transition-all duration-300 hover:opacity-100"
                   onClick={() => setSelectedItem(null)}
                 >
-                  <div className="flex flex-row items-center gap-5 rounded-md border px-3 opacity-40 transition-all duration-200 hover:opacity-100">
-                    <p className=" font-Montserrat text-sm uppercase">Hide</p>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
-                      />
-                    </svg>
-                  </div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
+                    />
+                  </svg>
                 </button>
               </div>
             </div>
@@ -132,19 +123,30 @@ export default function Hero() {
       </AnimatePresence>
 
       <AnimatePresence>
-        <motion.div className="relative mt-auto flex flex-row items-center justify-evenly py-10">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          className="relative mt-auto flex flex-row items-center justify-evenly bg-black bg-opacity-0 py-10 py-10 backdrop-blur-sm"
+        >
           {Categories.map((category) => (
-            <div key={category.id} className="text-white">
+            <motion.div
+              variants={item}
+              key={category.id}
+              className="text-white"
+            >
               <motion.button
                 type="button"
                 title={category.title}
+                whileHover={{ scale: 1.2, transition: { duration: 0.3 } }}
                 onClick={() => setSelectedItem(category)}
               >
                 <p className=" font-Oswald text-2xl uppercase">
                   {category.title}
                 </p>
               </motion.button>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
       </AnimatePresence>
@@ -152,32 +154,20 @@ export default function Hero() {
   )
 }
 
-const meatListContainer = {
+const container = {
   show: {
     transition: {
       staggerChildren: 0.35,
+      delayChildren: 2.5,
     },
   },
 }
 
-const meatListItemBg = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 0,
-  },
-  hover: {
-    opacity: 0.5,
-  },
-  exit: { opacity: 0 },
-}
-
-const meatListItemText = {
-  hidden: { opacity: 0, y: 300 },
-  hover: {},
+const item = {
+  hidden: { y: 200, opacity: 0 },
   show: {
     opacity: 1,
     y: 0,
-    transition: {},
   },
-  exit: {},
+  exit: { opacity: 0, y: 200 },
 }
