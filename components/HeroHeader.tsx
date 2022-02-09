@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default function HeroHeader() {
   return (
-    <div className="relative top-0 left-0 z-[5] flex h-auto w-full items-center justify-center bg-black bg-opacity-0 py-10 backdrop-blur-sm">
+    <div className="relative top-0 left-0 z-[5] flex h-auto w-full items-center justify-center bg-black bg-opacity-0 pt-5 backdrop-blur-sm">
       <motion.ul
         variants={container}
         animate="show"
@@ -13,7 +13,12 @@ export default function HeroHeader() {
         className=" flex flex-initial list-none flex-col items-center gap-5 font-Oswald text-base font-thin uppercase text-white sm:flex-row  "
       >
         {linksLeft.map((link, index) => (
-          <motion.li variants={item} whileHover="hover" key={index}>
+          <motion.li
+            variants={item}
+            whileHover="hover"
+            key={index}
+            className="scale-100 transition-all duration-200 hover:scale-125"
+          >
             <Link href={link.path} passHref>
               <a>{link.title}</a>
             </Link>
@@ -36,7 +41,12 @@ export default function HeroHeader() {
         className=" flex flex-initial list-none flex-col items-center gap-5 font-Oswald text-base font-thin uppercase text-white sm:flex-row"
       >
         {linksRight.map((link, index) => (
-          <motion.li variants={item} key={index} whileHover="hover">
+          <motion.li
+            variants={item}
+            key={index}
+            whileHover="hover"
+            className="scale-100 transition-all duration-200 hover:scale-125"
+          >
             <Link href={link.path} passHref>
               <motion.a>{link.title}</motion.a>
             </Link>
@@ -79,6 +89,6 @@ const container = {
 const item = {
   hidden: { scale: 0.5 },
   show: { scale: 1, transition: { duration: 1 } },
-  hover: { textDecoration: 'underline' },
+  hover: {},
   exit: { scale: 0.5 },
 }

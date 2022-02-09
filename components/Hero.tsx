@@ -21,7 +21,7 @@ export default function Hero() {
               duration: 1,
             }}
             key="heroBg"
-            className="absolute top-0 left-0  h-full w-full bg-[url('/assets/images/hero.jpeg')] bg-cover bg-center mix-blend-screen"
+            className="absolute top-0 left-0  h-full w-full bg-[url('/assets/images/hero.webp')] bg-cover bg-center mix-blend-screen"
           />
         )}
       </AnimatePresence>
@@ -37,7 +37,7 @@ export default function Hero() {
             }}
             key={selectedItem.id}
             autoPlay
-            poster="/assets/images/hero.jpeg"
+            poster="/assets/images/hero.webp"
             loop
             muted
             src={selectedItem.video}
@@ -75,50 +75,81 @@ export default function Hero() {
             </div>
           </motion.div>
         ) : (
-          <motion.div
-            key={selectedItem.id}
-            initial={{ opacity: 0, x: -500 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 500 }}
-            transition={{
-              duration: 1,
-              delay: 1,
-            }}
-            className="absolute top-0 left-0 mx-auto flex h-full w-full items-center justify-center "
-          >
-            <div className=" text-center text-white">
-              <p className=" font-Cinzel text-4xl">Taste our</p>
-              <h1 className="font-CinzelDeco text-9xl">{selectedItem.title}</h1>
-              <p className="mx-auto max-w-md text-center font-Cinzel">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim
-                exercitationem laudantium consequuntur commodi qui repellat at
-                dolorum.
-              </p>
-              <div className="my-5">
-                <button
-                  type="button"
-                  title="close"
-                  className="rounded-full border p-5 opacity-40 transition-all duration-300 hover:opacity-100"
-                  onClick={() => setSelectedItem(null)}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+          <>
+            <motion.div
+              key={selectedItem.id}
+              className="absolute top-0 left-0 flex h-full w-full items-center justify-center"
+            >
+              <motion.div
+                initial={{
+                  opacity: 0,
+                  scale: 1.5,
+                }}
+                animate={{
+                  opacity: [0, 1, 0],
+                  scale: [0.4, 1, 5],
+                }}
+                transition={{
+                  delay: 1,
+                  scale: { duration: 1, times: [0, 0.3, 1] },
+                  opacity: { duration: 1, times: [0, 0.3, 1] },
+                }}
+                style={{
+                  background: `url("/assets/images/${selectedItem.logo}"`,
+                  backgroundPosition: 'center',
+                  backgroundSize: 'contain',
+                  backgroundRepeat: 'no-repeat',
+                }}
+                className="mx-auto h-40 w-40 mix-blend-screen grayscale"
+              ></motion.div>
+            </motion.div>
+            <motion.div
+              key={selectedItem.id}
+              initial={{ opacity: 0, x: -500 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 500 }}
+              transition={{
+                duration: 1,
+                delay: 1.5,
+              }}
+              className="absolute top-0 left-0 mx-auto flex h-full w-full items-center justify-center "
+            >
+              <div className=" text-center text-white">
+                <p className=" font-Cinzel text-4xl">Taste our</p>
+                <h1 className="font-CinzelDeco text-9xl">
+                  {selectedItem.title}
+                </h1>
+                <p className="mx-auto max-w-md text-center font-Cinzel">
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim
+                  exercitationem laudantium consequuntur commodi qui repellat at
+                  dolorum.
+                </p>
+                <div className="my-5">
+                  <button
+                    type="button"
+                    title="close"
+                    className="rounded-full border p-5 opacity-40 transition-all duration-300 hover:opacity-100"
+                    onClick={() => setSelectedItem(null)}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
 
@@ -128,7 +159,7 @@ export default function Hero() {
           initial="hidden"
           animate="show"
           exit="exit"
-          className="relative mt-auto flex flex-row items-center justify-evenly bg-black bg-opacity-0 py-10 py-10 backdrop-blur-sm"
+          className="relative mt-auto flex flex-row items-center justify-evenly bg-black bg-opacity-0 py-5  backdrop-blur-sm"
         >
           {Categories.map((category) => (
             <motion.div
@@ -137,6 +168,7 @@ export default function Hero() {
               className="text-white"
             >
               <motion.button
+                className="mx-10 my-2"
                 type="button"
                 title={category.title}
                 whileHover={{ scale: 1.2, transition: { duration: 0.3 } }}
