@@ -40,7 +40,7 @@ export default function Hero() {
             loop
             muted
             src={selectedItem.video}
-            className="mix-blend- absolute top-0 left-0 h-full w-full object-cover object-center "
+            className="absolute top-0 left-0 h-full w-full object-cover object-center "
           ></motion.video>
         )}
       </AnimatePresence>

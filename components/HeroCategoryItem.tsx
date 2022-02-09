@@ -45,9 +45,9 @@ export default function HeroCategoryItem({ item, setSelectedItem }: Props) {
           duration: 1,
           delay: 1.5,
         }}
-        className="absolute top-0 left-0 mx-auto flex h-full w-full items-center justify-center  "
+        className="absolute top-0 left-0 mx-auto flex h-full w-full items-end justify-center pb-20  sm:items-center sm:pb-0 "
       >
-        <div className=" select-none rounded-lg bg-black bg-opacity-5 py-5 px-7 text-center text-white bg-blend-overlay backdrop-blur-sm">
+        <div className=" select-none rounded-lg bg-black bg-opacity-5 py-5 px-7 text-center text-white bg-blend-overlay sm:backdrop-blur-sm">
           <p className=" font-Cinzel text-2xl sm:text-4xl">Taste our</p>
           <h1 className="font-CinzelDeco text-7xl leading-normal sm:text-9xl">
             {item.title}
