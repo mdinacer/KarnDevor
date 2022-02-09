@@ -30,7 +30,7 @@ export default function HeroHeader() {
         animate={{ opacity: 1, scale: 1, transition: { duration: 1 } }}
         className="relative  mx-10  h-32 w-32 bg-clip-content"
       >
-        <Image src={'/assets/images/logo.png'} alt="" layout="fill" />
+        <Image priority src={'/assets/images/logo.webp'} alt="" layout="fill" />
       </motion.div>
       <motion.ul
         variants={container}

@@ -10,7 +10,7 @@ export default function HeroCategoryItem({ item, setSelectedItem }: Props) {
   return (
     <>
       <motion.div
-        key={item.id}
+        key={`image${item.id}`}
         className="absolute top-0 left-0 flex h-full w-full  items-center justify-center overflow-hidden"
       >
         <motion.div
@@ -37,7 +37,7 @@ export default function HeroCategoryItem({ item, setSelectedItem }: Props) {
         ></motion.div>
       </motion.div>
       <motion.div
-        key={item.id}
+        key={`text${item.id}`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
