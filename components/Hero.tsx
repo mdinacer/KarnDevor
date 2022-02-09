@@ -65,13 +65,16 @@ export default function Hero() {
             className="absolute top-0 left-0 flex h-full w-full items-center justify-center"
           >
             <div className=" text-white">
-              <p className=" font-Cinzel text-4xl">Welcome to</p>
+              {/* <p className=" font-Cinzel text-4xl">Welcome to</p> */}
               <h1 className="">
                 <span className="font-CinzelDeco text-9xl">K</span>
                 <span className="font-CinzelDeco text-7xl">arn</span>
                 <span className="font-CinzelDeco text-9xl">D</span>
                 <span className="font-CinzelDeco text-7xl">evor</span>
               </h1>
+              <p className="-translate-y-6 text-right font-CinzelDeco text-2xl">
+                Unleash the predator inside.
+              </p>
             </div>
           </motion.div>
         ) : (
@@ -105,9 +108,9 @@ export default function Hero() {
             </motion.div>
             <motion.div
               key={selectedItem.id}
-              initial={{ opacity: 0, x: -500 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 500 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{
                 duration: 1,
                 delay: 1.5,
