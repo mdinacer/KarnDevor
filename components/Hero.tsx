@@ -1,10 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import Image from 'next/image'
-import { useRef, useState } from 'react'
-import { MeatCategory } from '../data/intefaces'
-import { Categories } from '../data/lists'
+import { useState } from 'react'
+import { MeatCategory } from '../data/interfaces'
+import HeroBottomBar from './HeroBottomBar'
+import HeroCategoryItem from './HeroCategoryItem'
 import HeroHeader from './HeroHeader'
-import Menu from './Menu'
 
 export default function Hero() {
   const [selectedItem, setSelectedItem] = useState<MeatCategory | null>(null)
@@ -65,144 +64,30 @@ export default function Hero() {
             className="absolute top-0 left-0 flex h-full w-full items-center justify-center"
           >
             <div className=" text-white">
-              {/* <p className=" font-Cinzel text-4xl">Welcome to</p> */}
               <h1 className="">
-                <span className="font-CinzelDeco text-9xl">K</span>
-                <span className="font-CinzelDeco text-7xl">arn</span>
-                <span className="font-CinzelDeco text-9xl">D</span>
-                <span className="font-CinzelDeco text-7xl">evor</span>
+                <span className="font-CinzelDeco text-7xl sm:text-9xl">K</span>
+                <span className="font-CinzelDeco text-5xl sm:text-7xl">
+                  arn
+                </span>
+                <span className="font-CinzelDeco text-7xl sm:text-9xl">D</span>
+                <span className="font-CinzelDeco text-5xl sm:text-7xl">
+                  evor
+                </span>
               </h1>
-              <p className="-translate-y-6 text-right font-CinzelDeco text-2xl">
+              <p className="text-center font-CinzelDeco text-base sm:-translate-y-6 sm:text-right sm:text-2xl">
                 Unleash the predator inside.
               </p>
             </div>
           </motion.div>
         ) : (
-          <>
-            <motion.div
-              key={selectedItem.id}
-              className="absolute top-0 left-0 flex h-full w-full items-center justify-center"
-            >
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  scale: 1.5,
-                }}
-                animate={{
-                  opacity: [0, 1, 0],
-                  scale: [0.4, 1, 5],
-                }}
-                transition={{
-                  delay: 1,
-                  scale: { duration: 1, times: [0, 0.3, 1] },
-                  opacity: { duration: 1, times: [0, 0.3, 1] },
-                }}
-                style={{
-                  background: `url("/assets/images/${selectedItem.logo}"`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'contain',
-                  backgroundRepeat: 'no-repeat',
-                }}
-                className="mx-auto h-40 w-40 mix-blend-screen grayscale"
-              ></motion.div>
-            </motion.div>
-            <motion.div
-              key={selectedItem.id}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{
-                duration: 1,
-                delay: 1.5,
-              }}
-              className="absolute top-0 left-0 mx-auto flex h-full w-full items-center justify-center "
-            >
-              <div className=" text-center text-white">
-                <p className=" font-Cinzel text-4xl">Taste our</p>
-                <h1 className="font-CinzelDeco text-9xl">
-                  {selectedItem.title}
-                </h1>
-                <p className="mx-auto max-w-md text-center font-Cinzel">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Enim
-                  exercitationem laudantium consequuntur commodi qui repellat at
-                  dolorum.
-                </p>
-                <div className="my-5">
-                  <button
-                    type="button"
-                    title="close"
-                    className="rounded-full border p-5 opacity-40 transition-all duration-300 hover:opacity-100"
-                    onClick={() => setSelectedItem(null)}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-4 w-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          </>
+          <HeroCategoryItem
+            item={selectedItem}
+            setSelectedItem={(item) => setSelectedItem(item)}
+          />
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          exit="exit"
-          className="relative mt-auto flex flex-row items-center justify-evenly bg-black bg-opacity-0 py-5  backdrop-blur-sm"
-        >
-          {Categories.map((category) => (
-            <motion.div
-              variants={item}
-              key={category.id}
-              className="text-white"
-            >
-              <motion.button
-                className="mx-10 my-2"
-                type="button"
-                title={category.title}
-                whileHover={{ scale: 1.2, transition: { duration: 0.3 } }}
-                onClick={() => setSelectedItem(category)}
-              >
-                <p className=" font-Oswald text-2xl uppercase">
-                  {category.title}
-                </p>
-              </motion.button>
-            </motion.div>
-          ))}
-        </motion.div>
-      </AnimatePresence>
+      <HeroBottomBar setSelectedItem={(item) => setSelectedItem(item)} />
     </motion.div>
   )
-}
-
-const container = {
-  show: {
-    transition: {
-      staggerChildren: 0.35,
-      delayChildren: 2.5,
-    },
-  },
-}
-
-const item = {
-  hidden: { y: 200, opacity: 0 },
-  show: {
-    opacity: 1,
-    y: 0,
-  },
-  exit: { opacity: 0, y: 200 },
 }

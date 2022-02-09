@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default function HeroHeader() {
   return (
-    <div className="relative top-0 left-0 z-[5] flex h-auto w-full items-center justify-center bg-black bg-opacity-0 pt-5 backdrop-blur-sm">
+    <div className="relative top-0 left-0 z-[5] flex h-auto w-full items-center justify-center bg-black bg-opacity-0 pt-5 backdrop-blur-md sm:backdrop-blur-sm">
       <motion.ul
         variants={container}
         animate="show"
