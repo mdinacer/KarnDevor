@@ -1,20 +1,11 @@
-import Head from 'next/head'
-import Header from '../components/Header'
+import { AnimatePresence, motion } from 'framer-motion'
 import Hero from '../components/Hero'
+import Layout from '../components/Layout'
 
 export default function Home() {
   return (
-    <div className="">
-      <Head>
-        <title>KarnDevor</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="">
-        <Hero />
-      </main>
-
-      <footer className=""></footer>
-    </div>
+    <Layout title={'KarnDevor'} description={'Unleash the predator inside.'}>
+      <Hero />
+    </Layout>
   )
 }

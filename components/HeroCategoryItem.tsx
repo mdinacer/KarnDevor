@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { MeatCategory } from '../data/interfaces'
 
 interface Props {
   item: MeatCategory
-  setSelectedItem: (value: any) => void
 }
 
-export default function HeroCategoryItem({ item, setSelectedItem }: Props) {
+export default function HeroCategoryItem({ item }: Props) {
   return (
     <>
       <motion.div
@@ -45,7 +45,7 @@ export default function HeroCategoryItem({ item, setSelectedItem }: Props) {
           duration: 1,
           delay: 1.5,
         }}
-        className="absolute top-0 left-0 mx-auto flex h-full w-full items-end justify-center pb-20  sm:items-center sm:pb-0 "
+        className="relative mx-auto flex h-full w-full items-end justify-center self-end pb-20 sm:items-center  sm:self-center sm:pb-0 "
       >
         <div className=" select-none rounded-lg bg-black bg-opacity-5 py-5 px-7 text-center text-white bg-blend-overlay sm:backdrop-blur-sm">
           <p className=" font-Cinzel text-2xl sm:text-4xl">Taste our</p>
@@ -55,28 +55,33 @@ export default function HeroCategoryItem({ item, setSelectedItem }: Props) {
           <p className="mx-auto max-w-sm pt-0 text-left font-Montserrat text-base sm:max-w-md sm:pt-4 sm:text-center">
             {item.description}
           </p>
-          <div className="my-5   ">
-            <button
-              type="button"
-              title="close"
-              className="rounded-full border border-[#B33030] bg-[#B33030] p-5 opacity-100 transition-all duration-300 hover:bg-opacity-100 sm:bg-opacity-50"
-              onClick={() => setSelectedItem(null)}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+          <div className="my-5  ">
+            <Link href={`/menu/${item.slug}`} passHref>
+              <a
+                type="button"
+                title="View details"
+                className="rounded-full border border-[#B33030] bg-[#B33030] p-5 opacity-100 transition-all duration-300 hover:bg-opacity-100 sm:bg-opacity-50"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
-                />
-              </svg>
-            </button>
+                <motion.svg
+                  animate={{
+                    scale: [1, 1.2],
+                    transition: { repeat: Infinity, repeatType: 'reverse' },
+                  }}
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
+                  />
+                </motion.svg>
+              </a>
+            </Link>
           </div>
         </div>
       </motion.div>

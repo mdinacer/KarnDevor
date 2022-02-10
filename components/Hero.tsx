@@ -7,9 +7,10 @@ import HeroHeader from './HeroHeader'
 
 export default function Hero() {
   const [selectedItem, setSelectedItem] = useState<MeatCategory | null>(null)
+  const [isShowDetails, setIsShowDetails] = useState(false)
 
   return (
-    <motion.div className="relative flex h-screen w-full flex-col bg-[#000]">
+    <motion.div className="relative flex h-full min-h-screen w-full flex-col bg-[#000]">
       <AnimatePresence>
         {!selectedItem?.video && (
           <motion.div
@@ -47,47 +48,65 @@ export default function Hero() {
 
       <HeroHeader />
 
-      <AnimatePresence>
-        {!selectedItem ? (
-          <motion.div
-            initial={{ opacity: 0, x: -500 }}
-            animate={{
-              opacity: 1,
-              x: 0,
-              transition: { duration: 1, delay: 1.5 },
-            }}
-            exit={{
-              opacity: 0,
-              x: 500,
-              transition: { duration: 0.7, delay: 0.5 },
-            }}
-            className="absolute top-0 left-0 flex h-full w-full items-center justify-center"
-          >
-            <div className=" text-white">
-              <h1 className="">
-                <span className="font-CinzelDeco text-7xl sm:text-9xl">K</span>
-                <span className="font-CinzelDeco text-5xl sm:text-7xl">
-                  arn
-                </span>
-                <span className="font-CinzelDeco text-7xl sm:text-9xl">D</span>
-                <span className="font-CinzelDeco text-5xl sm:text-7xl">
-                  evor
-                </span>
-              </h1>
-              <p className="text-center font-CinzelDeco text-base sm:-translate-y-6 sm:text-right sm:text-2xl">
-                Unleash the predator inside.
-              </p>
-            </div>
-          </motion.div>
-        ) : (
-          <HeroCategoryItem
-            item={selectedItem}
-            setSelectedItem={(item) => setSelectedItem(item)}
-          />
-        )}
-      </AnimatePresence>
+      <motion.div
+        variants={container}
+        animate={isShowDetails ? 'exit' : 'show'}
+        className="relative flex flex-auto items-center justify-center "
+      >
+        <AnimatePresence>
+          {!selectedItem ? (
+            <motion.div
+              initial={{ opacity: 0, x: -500 }}
+              animate={{
+                opacity: 1,
+                x: 0,
+                transition: { duration: 1, delay: 1.5 },
+              }}
+              exit={{
+                opacity: 0,
+                x: 500,
+                transition: { duration: 0.7, delay: 0.5 },
+              }}
+              className=" flex h-full w-full items-center justify-center self-end pb-20 sm:self-center sm:pb-0"
+            >
+              <div className=" text-white">
+                <h1 className="">
+                  <span className="font-CinzelDeco text-7xl sm:text-9xl">
+                    K
+                  </span>
+                  <span className="font-CinzelDeco text-5xl sm:text-7xl">
+                    arn
+                  </span>
+                  <span className="font-CinzelDeco text-7xl sm:text-9xl">
+                    D
+                  </span>
+                  <span className="font-CinzelDeco text-5xl sm:text-7xl">
+                    evor
+                  </span>
+                </h1>
+                <p className="text-center font-CinzelDeco text-base sm:-translate-y-6 sm:text-right sm:text-2xl">
+                  Unleash the predator inside.
+                </p>
+              </div>
+            </motion.div>
+          ) : (
+            <HeroCategoryItem item={selectedItem} />
+          )}
+        </AnimatePresence>
+      </motion.div>
 
-      <HeroBottomBar setSelectedItem={(item) => setSelectedItem(item)} />
+      {!isShowDetails && (
+        <HeroBottomBar
+          setSelectedItem={(item) => setSelectedItem(item)}
+          setShowDetails={setIsShowDetails}
+        />
+      )}
     </motion.div>
   )
+}
+
+const container = {
+  hidden: { opacity: 0, x: -500 },
+  show: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: -500, transition: { duration: 1 } },
 }

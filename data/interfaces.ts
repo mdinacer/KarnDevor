@@ -1,8 +1,9 @@
 export interface MeatCategory {
     id: number;
+    slug: string;
     title: string;
     logo: string;
-    image: string;
+    image: string | null;
     video: string | null;
     items: CategoryItem[];
     description: string;

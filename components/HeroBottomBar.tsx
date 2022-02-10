@@ -4,9 +4,13 @@ import { Categories } from '../data/lists'
 
 interface Props {
   setSelectedItem: (item: MeatCategory) => void
+  setShowDetails: (value: any) => void
 }
 
-export default function HeroBottomBar({ setSelectedItem }: Props) {
+export default function HeroBottomBar({
+  setSelectedItem,
+  setShowDetails,
+}: Props) {
   return (
     <AnimatePresence>
       <motion.div
@@ -23,7 +27,10 @@ export default function HeroBottomBar({ setSelectedItem }: Props) {
               type="button"
               title={category.title}
               whileHover={{ scale: 1.2, transition: { duration: 0.3 } }}
-              onClick={() => setSelectedItem(category)}
+              onClick={() => {
+                setSelectedItem(category)
+                setShowDetails(false)
+              }}
             >
               <p className=" font-Oswald text-base uppercase sm:text-2xl">
                 {category.title}
