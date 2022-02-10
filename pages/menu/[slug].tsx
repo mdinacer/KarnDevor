@@ -73,7 +73,7 @@ export default function Menu() {
                       transition: { duration: 1, delay: 2 },
                     }}
                     exit={{ opacity: 0 }}
-                    className="m-auto flex h-full w-full items-center justify-center"
+                    className="m-auto hidden h-full w-full items-center justify-center sm:flex"
                   >
                     <p className=" max-w-lg text-center font-Cinzel text-2xl">
                       {category.description}

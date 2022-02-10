@@ -13,7 +13,7 @@ export default function MenuListMobile({ category }: Props) {
         {category.items.map((item) => (
           <motion.div
             key={item.id}
-            className="relative my-auto h-[30vh] w-full "
+            className="relative my-auto h-[60vh] w-full px-5 sm:px-0"
           >
             <div className="relative h-1/2 w-full">
               <Image
@@ -25,8 +25,10 @@ export default function MenuListMobile({ category }: Props) {
                 className=" transition-all sm:grayscale-50 sm:hover:grayscale-0"
               />
             </div>
-            <div className=" mx-auto w-auto max-w-sm">
-              <p className=" font-Oswald text-3xl">{item.title}</p>
+            <div className=" mx-auto w-auto max-w-sm ">
+              <p className=" font-Oswald text-3xl leading-loose">
+                {item.title}
+              </p>
               <p className=" font-Montserrat">{item.description}</p>
             </div>
           </motion.div>
