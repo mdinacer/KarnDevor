@@ -1,17 +1,21 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { ParsedUrlQuery } from 'querystring'
 import { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
-import { MeatCategory } from '../../data/interfaces'
+import MenuBottomBar from '../../components/Menu/MenuBottomBar'
+import MenuHeader from '../../components/Menu/MenuHeader'
+import MenuItem from '../../components/Menu/MenuItem'
+import MenuListMobile from '../../components/Menu/MenuListMobile'
+import { CategoryItem, MeatCategory } from '../../data/interfaces'
 import { Categories } from '../../data/lists'
 
 export default function Menu() {
   const router = useRouter()
   const { slug } = router.query
   const [category, setCategory] = useState<MeatCategory | null>(null)
+  const [selectedItem, setSelectedItem] = useState<CategoryItem | null>(null)
 
   useEffect(() => {
     console.log(slug)
@@ -33,59 +37,61 @@ export default function Menu() {
       title={category?.title ?? 'Menu'}
       description={category?.description ?? 'Menu'}
     >
-      <div className="relative h-full min-h-screen w-full bg-black text-white ">
-        <AnimatePresence>
-          <motion.div className={'absolute top-0 left-0 h-full w-full'}>
-            <motion.div
-              className="relative h-full w-full  "
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.4, transition: { duration: 1, delay: 1 } }}
-            >
-              <Image
-                src={category?.image ?? '/assets/images/hero.webp'}
-                layout="fill"
-                alt={category?.title}
-                className=" object-cover  object-center"
-              />
-            </motion.div>
+      <AnimatePresence>
+        <motion.div className={'fixed top-0 left-0 h-full w-full'}>
+          <motion.div
+            className="relative h-full w-full  "
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 0.4,
+              transition: { duration: 0.5, delay: 0.5 },
+            }}
+          >
+            <Image
+              src={category?.image ?? '/assets/images/hero.webp'}
+              layout="fill"
+              alt={category?.title}
+              className=" object-cover   object-center"
+            />
           </motion.div>
-        </AnimatePresence>
-
-        <Link href={'/'} passHref>
-          <a title="Home">
-            <div className="relatives flex h-auto w-full flex-col items-center p-5 sm:flex-row ">
-              <div className="relative mx-2 mb-2 h-12 w-12 sm:mb-0">
-                <Image
-                  src={'/assets/images/logo.webp'}
-                  alt="logo"
-                  layout="fill"
-                />
-              </div>
-              <p className="relative font-Cinzel text-2xl text-white">
-                <span className="font-CinzelDeco text-2xl sm:text-4xl">K</span>
-                <span className="font-CinzelDeco text-xl sm:text-2xl">arn</span>
-                <span className="font-CinzelDeco text-2xl sm:text-4xl">D</span>
-                <span className="font-CinzelDeco text-xl sm:text-2xl">
-                  evor
-                </span>
-              </p>
-            </div>
-          </a>
-        </Link>
-        <div className="relative mx-auto h-screen w-full px-5 pb-14 pt-5 sm:w-auto sm:px-0 lg:container">
-          <AnimatePresence>
-            <motion.p
-              variants={titleVariants}
-              initial="hidden"
-              animate="show"
-              exit="exit"
-              className="relative text-center font-CinzelDeco text-7xl sm:text-left sm:text-9xl"
-            >
-              {category.title}
-            </motion.p>
-          </AnimatePresence>
+        </motion.div>
+      </AnimatePresence>
+      <AnimateSharedLayout>
+        <div className="relative flex h-full min-h-screen w-full flex-col  text-white">
+          <div className="h-auto min-h-[20vh] w-full flex-initial ">
+            <MenuHeader category={category} />
+          </div>
+          <div className="h-[60vh] w-full flex-initial ">
+            <MenuListMobile category={category} />
+            <AnimatePresence>
+              <AnimatePresence>
+                {!selectedItem && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{
+                      opacity: 1,
+                      transition: { duration: 1, delay: 2 },
+                    }}
+                    exit={{ opacity: 0 }}
+                    className="m-auto flex h-full w-full items-center justify-center"
+                  >
+                    <p className=" max-w-lg text-center font-Cinzel text-2xl">
+                      {category.description}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              {selectedItem && <MenuItem item={selectedItem} />}
+            </AnimatePresence>
+          </div>
+          <div className="hidden h-auto min-h-[20vh] w-full  flex-initial sm:block ">
+            <MenuBottomBar
+              category={category}
+              setSelectedItem={(item) => setSelectedItem(item)}
+            />
+          </div>
         </div>
-      </div>
+      </AnimateSharedLayout>
     </Layout>
   )
 }

@@ -4,7 +4,11 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      grayscale: {
+        50: '50%',
+      },
+    },
     fontFamily: {
       Crimson: ['"Crimson Pro"', 'system-ui'],
       Montserrat: ['"Montserrat"', 'Georgia'],

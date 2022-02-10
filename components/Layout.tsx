@@ -27,7 +27,7 @@ const Layout = ({ children, title, description }: Props): JSX.Element => (
       exit="exit"
       variants={variants}
       transition={{ type: 'linear' }}
-      className="h-full w-full "
+      className="relative h-full w-full "
     >
       {children}
     </motion.main>

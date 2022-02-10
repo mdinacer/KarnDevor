@@ -15,4 +15,8 @@ export interface CategoryItem {
     title: string;
     image: string;
     description: string;
+    calories?: number;
+    fat?: number;
+    carbs?: number
+    protein?: number;
 }
