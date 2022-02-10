@@ -21,7 +21,11 @@ export default function HeroBottomBar({
         className="relative mt-auto flex flex-row items-center justify-evenly bg-black bg-opacity-0 py-5 backdrop-blur-md sm:backdrop-blur-sm"
       >
         {Categories.map((category) => (
-          <motion.div variants={item} key={category.id} className="text-white">
+          <motion.div
+            variants={item}
+            key={category.id}
+            className="pb-12 text-white sm:pb-5"
+          >
             <motion.button
               className=" my-2 sm:mx-10"
               type="button"
