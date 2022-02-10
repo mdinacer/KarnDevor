@@ -24,7 +24,7 @@ export default function HeroBottomBar({
           <motion.div
             variants={item}
             key={category.id}
-            className="pb-12 text-white sm:pb-5"
+            className="pb-5 text-white"
           >
             <motion.button
               className=" my-2 sm:mx-10"
@@ -57,7 +57,7 @@ const container = {
 }
 
 const item = {
-  hidden: { y: 200, opacity: 0 },
+  hidden: { y: -50, opacity: 0 },
   show: {
     opacity: 1,
     y: 0,
