@@ -1,13 +1,16 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
-import { MeatCategory } from '../../data/interfaces'
+import { CategoryItem, MeatCategory } from '../../data/interfaces'
 import HeroBottomBar from './HeroBottomBar'
 import HeroCategoryItem from './HeroCategoryItem'
 import HeroHeader from './HeroHeader'
+import MenuItem from '../Menu/MenuItem'
+import MenuBottomBar from '../Menu/MenuBottomBar'
 
 export default function Hero() {
   const [category, setCategory] = useState<MeatCategory | null>(null)
   const [showDishes, setShowDishes] = useState(false)
+  const [dish, setDish] = useState<CategoryItem | null>(null)
 
   return (
     <motion.div className="relative flex h-full min-h-screen w-full flex-col bg-[#000]">
@@ -48,58 +51,57 @@ export default function Hero() {
 
       <HeroHeader />
 
-      {!showDishes ? (
-        <motion.div
-          variants={container}
-          animate={'show'}
-          className="relative flex flex-auto items-center justify-center "
-        >
-          <AnimatePresence>
-            {!category ? (
-              <motion.div
-                initial={{ opacity: 0, x: -500 }}
-                animate={{
-                  opacity: 1,
-                  x: 0,
-                  transition: { duration: 1, delay: 1.5 },
-                }}
-                exit={{
-                  opacity: 0,
-                  x: 500,
-                  transition: { duration: 0.7, delay: 0.5 },
-                }}
-                className=" flex h-full w-full items-center justify-center self-end pb-20 sm:self-center sm:pb-0"
-              >
-                <div className=" text-white">
-                  <h1 className="">
-                    <span className="font-CinzelDeco text-7xl sm:text-9xl">
-                      K
-                    </span>
-                    <span className="font-CinzelDeco text-5xl sm:text-7xl">
-                      arn
-                    </span>
-                    <span className="font-CinzelDeco text-7xl sm:text-9xl">
-                      D
-                    </span>
-                    <span className="font-CinzelDeco text-5xl sm:text-7xl">
-                      evor
-                    </span>
-                  </h1>
-                  <p className="text-center font-CinzelDeco text-base sm:-translate-y-6 sm:text-right sm:text-2xl">
-                    Unleash the predator inside.
-                  </p>
-                </div>
-              </motion.div>
-            ) : (
-              <HeroCategoryItem item={category} />
-            )}
-          </AnimatePresence>
-        </motion.div>
-      ) : (
-        <div>Dishes</div>
-      )}
-
-      <HeroBottomBar setSelectedItem={(item) => setCategory(item)} />
+      <motion.div
+        variants={container}
+        animate={'show'}
+        className="relative flex flex-auto items-center justify-center "
+      >
+        <AnimatePresence>
+          {!category ? (
+            <motion.div
+              initial={{ opacity: 0, x: -500 }}
+              animate={{
+                opacity: 1,
+                x: 0,
+                transition: { duration: 1, delay: 1.5 },
+              }}
+              exit={{
+                opacity: 0,
+                x: 500,
+                transition: { duration: 0.7, delay: 0.5 },
+              }}
+              className=" flex h-full w-full items-center justify-center self-end pb-20 sm:self-center sm:pb-0"
+            >
+              <div className=" text-white">
+                <h1 className="">
+                  <span className="font-CinzelDeco text-7xl sm:text-9xl">
+                    K
+                  </span>
+                  <span className="font-CinzelDeco text-5xl sm:text-7xl">
+                    arn
+                  </span>
+                  <span className="font-CinzelDeco text-7xl sm:text-9xl">
+                    D
+                  </span>
+                  <span className="font-CinzelDeco text-5xl sm:text-7xl">
+                    evor
+                  </span>
+                </h1>
+                <p className="text-center font-CinzelDeco text-base sm:-translate-y-6 sm:text-right sm:text-2xl">
+                  Unleash the predator inside.
+                </p>
+              </div>
+            </motion.div>
+          ) : (
+            <HeroCategoryItem item={category} />
+          )}
+        </AnimatePresence>
+      </motion.div>
+      <HeroBottomBar
+        setSelectedItem={(item) => {
+          setCategory(item)
+        }}
+      />
     </motion.div>
   )
 }

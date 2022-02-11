@@ -8,7 +8,9 @@ interface Props {
 }
 
 export default function HeroBottomBar({ setSelectedItem }: Props) {
-  const [selectedIndex, setSelectedIndex] = useState(-1)
+  const [selectedCategory, setSelectedCategory] = useState<MeatCategory | null>(
+    null
+  )
   return (
     <AnimatePresence>
       <motion.div
@@ -24,7 +26,7 @@ export default function HeroBottomBar({ setSelectedItem }: Props) {
             key={category.id}
             style={{
               backgroundColor:
-                selectedIndex === category.id
+                selectedCategory?.id === category.id
                   ? 'rgba(255,255,255,.5)'
                   : 'rgba(255,255,255,.05)',
             }}
@@ -39,7 +41,7 @@ export default function HeroBottomBar({ setSelectedItem }: Props) {
               whileHover={{ scale: 1.2, transition: { duration: 0.3 } }}
               onClick={() => {
                 setSelectedItem(category)
-                setSelectedIndex(category.id)
+                setSelectedCategory(category)
               }}
             >
               <motion.p
@@ -56,7 +58,7 @@ export default function HeroBottomBar({ setSelectedItem }: Props) {
             </motion.button>
           </motion.div>
         ))}
-      </motion.div>
+      </motion.div> 
     </AnimatePresence>
   )
 }
