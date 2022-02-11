@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { MeatCategory } from '../data/interfaces'
+import { MeatCategory } from '../../data/interfaces'
 
 interface Props {
   item: MeatCategory
@@ -40,19 +40,19 @@ export default function HeroCategoryItem({ item }: Props) {
         key={`text${item.id}`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
+        exit={{ opacity: 0, y: -500 }}
         transition={{
           duration: 1,
           delay: 1.5,
         }}
         className="relative mx-auto flex h-full w-full items-end justify-center self-end pb-20 sm:items-center  sm:self-center sm:pb-0 "
       >
-        <div className=" select-none rounded-lg bg-black bg-opacity-5 py-5 px-7 text-center text-white bg-blend-overlay sm:backdrop-blur-sm">
-          <p className=" font-Cinzel text-2xl sm:text-4xl">Taste our</p>
+        <div className=" select-none rounded-2xl bg-black bg-opacity-5 py-5 px-7 text-center text-white  sm:backdrop-blur-sm">
+          <p className=" hidden font-Cinzel text-2xl sm:text-4xl">Taste our</p>
           <h1 className="font-CinzelDeco text-7xl leading-normal sm:text-9xl">
             {item.title}
           </h1>
-          <p className="mx-auto max-w-sm pt-0 text-left font-Montserrat text-base sm:max-w-md sm:pt-4 sm:text-center">
+          <p className="mx-auto max-w-md pt-0 text-left font-Montserrat text-base sm:max-w-md sm:pt-2 sm:text-center">
             {item.description}
           </p>
           <div className="my-5  ">

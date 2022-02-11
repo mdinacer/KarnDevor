@@ -10,7 +10,7 @@ export default function MenuItem({ item }: Props) {
   return (
     <motion.div
       key={`menu${item.id}`}
-      className="my-auto mx-auto hidden h-full w-auto flex-row items-center justify-center bg-black bg-opacity-10 backdrop-blur-sm sm:flex"
+      className="relative my-auto mx-auto hidden h-full w-auto flex-row items-center justify-center bg-black bg-opacity-10 backdrop-blur-sm sm:flex"
     >
       <motion.div
         transition={{ duration: 0.6 }}
@@ -23,7 +23,7 @@ export default function MenuItem({ item }: Props) {
             duration: 3,
           },
         }}
-        className="relative h-[30vh] w-[40vw]"
+        className="relative h-[30vh] w-[30vw]"
       >
         <Image
           src={item.image}

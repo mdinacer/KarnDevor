@@ -14,7 +14,7 @@ export default function MenuBottomBar({ setSelectedItem, category }: Props) {
         {category.items.map((item) => (
           <motion.button
             initial={{ scale: 0.8, y: 0 }}
-            whileHover={{ scale: 1.3, y: -100 }}
+            whileHover={{ scale: 1.3, y: -50 }}
             key={item.id}
             type="button"
             className=""

@@ -38,13 +38,33 @@ export default function Menu() {
       description={category?.description ?? 'Menu'}
     >
       <AnimatePresence>
-        <motion.div className={'fixed top-0 left-0 h-full w-full'}>
+        {category?.video && (
+          <motion.video
+            playsInline
+            animate={{ opacity: 0.6 }}
+            exit={{ opacity: 0 }}
+            initial={{ opacity: 0 }}
+            transition={{
+              duration: 1,
+            }}
+            key={category.id}
+            autoPlay
+            poster="/assets/images/hero.webp"
+            loop
+            muted
+            src={category.video}
+            className="absolute top-0 left-0 h-full w-full object-cover object-center "
+          ></motion.video>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        <motion.div className={'fixed top-0 left-0 hidden h-full w-full'}>
           <motion.div
             className="relative h-full w-full  "
             initial={{ opacity: 0 }}
             animate={{
               opacity: 0.4,
-              transition: { duration: 0.5, delay: 0.5 },
+              transition: {},
             }}
           >
             <Image
