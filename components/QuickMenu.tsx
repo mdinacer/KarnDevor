@@ -114,74 +114,83 @@ export function QuickMenuMobile() {
         initial="hidden"
         animate={isVisible ? 'visible' : 'hidden'}
         transition={{ stiffness: 280, duration: 0.4 }}
-        className="fixed top-0 z-10 flex h-full w-full overflow-x-hidden  overflow-y-scroll bg-opacity-5  py-10 drop-shadow-lg backdrop-blur-lg sm:hidden "
+        className="absolute top-0 z-10 flex h-screen w-full overflow-hidden  bg-opacity-5  py-10 drop-shadow-lg backdrop-blur-lg sm:hidden "
       >
-        {isVisible && (
-          <div className="relative flex h-auto w-full flex-col items-center justify-evenly  p-6 text-white">
-            <div className="max-w-sm flex-initial px-5">
-              <p className=" text-center font-Oswald text-3xl leading-loose">
-                About
-              </p>
-              <p className=" mx-auto w-full pb-2 text-left font-Montserrat text-base font-thin leading-relaxed">
-                Hi, I&apos;m, Mohammedi Abdenasser, a web developer, based in
-                Algeria.
-                <br /> I started coding late 2014, but my love for coding
-                started at early age when I started coding with Pascal and
-                Delphi 2.
-                <br /> I Have always been fascinated by complex yet clean code,
-                but Also by beautiful and elegant user interface Design.
-              </p>
-              <p className=" text-center font-Oswald text-3xl leading-loose">
-                Note
-              </p>
-              <p className=" mx-auto w-full text-left font-Montserrat text-base font-thin leading-relaxed">
-                Background images are downloaded from www.pexel.com.
-                <br />
-                PNG Images (animals and dishes images), are downloaded from
-                www.pngegg.com and are used as placeholders for presentation
-                purpose. (commercial use not allowed).
-              </p>
-            </div>
-            <div className="flex w-full max-w-sm flex-initial flex-col gap-4 px-5">
-              <p className=" text-center font-Oswald text-3xl leading-loose">
-                Contact
-              </p>
+        <div className="relative h-full w-full overflow-auto">
+          {isVisible && (
+            <div className="relative flex h-auto w-full flex-col items-center justify-evenly  p-6 text-white">
+              <div className="max-w-sm flex-initial px-5">
+                <p className=" text-center font-Oswald text-3xl leading-loose">
+                  About
+                </p>
+                <p className=" mx-auto w-full pb-2 text-left font-Montserrat text-base font-thin leading-relaxed">
+                  Hi, I&apos;m, Mohammedi Abdenasser, a web developer, based in
+                  Algeria.
+                  <br /> I started coding late 2014, but my love for coding
+                  started at early age when I started coding with Pascal and
+                  Delphi 2.
+                  <br /> I Have always been fascinated by complex yet clean
+                  code, but Also by beautiful and elegant user interface Design.
+                </p>
+                <p className=" text-center font-Oswald text-3xl leading-loose">
+                  Note
+                </p>
+                <p className=" mx-auto w-full text-left font-Montserrat text-base font-thin leading-relaxed">
+                  Background images are downloaded from www.pexel.com.
+                  <br />
+                  PNG Images (animals and dishes images), are downloaded from
+                  www.pngegg.com and are used as placeholders for presentation
+                  purpose. (commercial use not allowed).
+                </p>
+              </div>
+              <div className="flex w-full max-w-sm flex-initial flex-col gap-4 px-5">
+                <p className=" text-center font-Oswald text-3xl leading-loose">
+                  Contact
+                </p>
 
-              <a
-                href="tel:+213 662 991 735"
-                className=" flex flex-row justify-between"
-              >
-                <span className=" font-Oswald text-xl uppercase">Phone</span>
-                <span className="text-center font-Montserrat text-xl">
-                  +213 662 991 735
-                </span>
-              </a>
-              <a
-                href="mailto:mdi.nacer@outlook.com"
-                className=" flex flex-row justify-between"
-              >
-                <span className=" font-Oswald text-xl uppercase">Email</span>
-                <span className="text-center font-Montserrat text-xl">
-                  mdi.nacer@outlook.com
-                </span>
-              </a>
+                <a
+                  href="tel:+213 662 991 735"
+                  className=" flex flex-col justify-between"
+                >
+                  <span className=" font-Oswald text-xl uppercase">Phone</span>
+                  <span className="text-right font-Montserrat text-xl">
+                    +213 662 991 735
+                  </span>
+                </a>
+                <a
+                  href="mailto:mdi.nacer@outlook.com"
+                  className=" flex flex-col justify-between"
+                >
+                  <span className=" leading font-Oswald text-xl uppercase leading-loose">
+                    Email
+                  </span>
+                  <span className="text-right font-Montserrat text-xl">
+                    mdi.nacer@outlook.com
+                  </span>
+                </a>
 
-              <p className=" font-Oswald text-xl uppercase">Follow us</p>
-              <p className=" flex flex-row items-center justify-between font-Montserrat text-base uppercase">
-                {followLinks.map(({ title, path }, index) => (
-                  <a key={index} href={path} target={'_blank'} rel="noreferrer">
-                    {title}
-                  </a>
-                ))}
-              </p>
+                <p className=" font-Oswald text-xl uppercase">Follow us</p>
+                <p className=" flex w-full flex-col items-center justify-between gap-3 font-Montserrat text-base uppercase">
+                  {followLinks.map(({ title, path }, index) => (
+                    <a
+                      key={index}
+                      href={path}
+                      target={'_blank'}
+                      rel="noreferrer"
+                    >
+                      {title}
+                    </a>
+                  ))}
+                </p>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
         <button
           type="button"
           onClick={() => setIsVisible((prev) => !prev)}
           title="show menu"
-          className="absolute left-0 bottom-0 m-auto flex h-auto w-full items-center justify-center pb-2  text-white opacity-70"
+          className="fixed left-0 bottom-0 m-auto flex h-auto w-full items-center justify-center pb-2  text-white opacity-70"
         >
           <motion.svg
             xmlns="http://www.w3.org/2000/svg"
@@ -210,7 +219,7 @@ const container = {
 }
 
 const containerMobile = {
-  hidden: { y: '-96vh', opacity: 0.4 },
+  hidden: { y: '-93vh', opacity: 0.4 },
   visible: { y: 0, opacity: 1 },
 }
 
