@@ -47,7 +47,7 @@ export default function HeroCategoryItem({ item }: Props) {
         }}
         className="relative mx-auto flex h-full w-full items-end justify-center self-end pb-20 sm:items-center  sm:self-center sm:pb-0 "
       >
-        <div className=" select-none rounded-2xl bg-black bg-opacity-5 py-5 px-7 text-center text-white  sm:backdrop-blur-sm">
+        <div className=" select-none rounded-2xl bg-black bg-opacity-5 px-5 py-5 text-center text-white sm:backdrop-blur-sm  lg:px-7">
           <p className=" hidden font-Cinzel text-2xl sm:text-4xl">Taste our</p>
           <h1 className="font-CinzelDeco text-7xl leading-normal sm:text-9xl">
             {item.title}

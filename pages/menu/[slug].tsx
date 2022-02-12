@@ -16,8 +16,6 @@ export default function Menu() {
   const [selectedItem, setSelectedItem] = useState<CategoryItem | null>(null)
 
   useEffect(() => {
-    console.log(slug)
-
     if (slug) {
       const item = Categories.find((c) => c.slug === slug)
       setCategory(item ?? null)
@@ -35,64 +33,66 @@ export default function Menu() {
       title={category?.title ?? 'Menu'}
       description={category?.description ?? 'Menu'}
     >
-      <AnimatePresence>
-        {category?.video && (
-          <motion.video
-            playsInline
-            animate={{ opacity: 0.6 }}
-            exit={{ opacity: 0 }}
-            initial={{ opacity: 0 }}
-            transition={{
-              duration: 1,
-            }}
-            key={category.id}
-            autoPlay
-            poster="/assets/images/hero.webp"
-            loop
-            muted
-            src={category.video}
-            className="fixed top-0 left-0 h-full w-full object-cover object-center "
-          ></motion.video>
-        )}
-      </AnimatePresence>
+      <div className="relative h-screen overflow-y-auto overflow-x-hidden">
+        <AnimatePresence>
+          {category?.video && (
+            <motion.video
+              playsInline
+              animate={{ opacity: 0.6 }}
+              exit={{ opacity: 0 }}
+              initial={{ opacity: 0 }}
+              transition={{
+                duration: 1,
+              }}
+              key={category.id}
+              autoPlay
+              poster="/assets/images/hero.webp"
+              loop
+              muted
+              src={category.video}
+              className="fixed top-0 left-0 h-screen w-full object-cover object-center "
+            ></motion.video>
+          )}
+        </AnimatePresence>
 
-      <AnimateSharedLayout>
-        <div className="relative flex h-full  w-full flex-col  text-white">
-          <div className="h-auto min-h-[20vh] w-full flex-initial">
-            <MenuHeader category={category} />
-          </div>
-          <div className="relative flex h-auto min-h-[60vh] w-full flex-auto items-center  justify-center">
-            <MenuListMobile category={category} />
-            <AnimatePresence>
+        <AnimateSharedLayout>
+          <div className="relative flex h-auto  w-full flex-col  text-white">
+            <div className="h-auto min-h-[20vh] w-full flex-initial">
+              <MenuHeader category={category} />
+            </div>
+            <div className="relative flex h-auto min-h-[60vh] w-full flex-auto items-center  justify-center">
+              <MenuListMobile category={category} />
               <AnimatePresence>
-                {!selectedItem ? (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{
-                      opacity: 1,
-                      transition: { duration: 1, delay: 1 },
-                    }}
-                    exit={{ opacity: 0 }}
-                    className="m-auto hidden h-full w-full items-center justify-center xl:flex"
-                  >
-                    <p className=" max-w-lg text-center font-Cinzel text-2xl md:max-w-2xl">
-                      {category.description}
-                    </p>
-                  </motion.div>
-                ) : (
-                  <MenuItem item={selectedItem} />
-                )}
+                <AnimatePresence>
+                  {!selectedItem ? (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{
+                        opacity: 1,
+                        transition: { duration: 1, delay: 1 },
+                      }}
+                      exit={{ opacity: 0 }}
+                      className="m-auto hidden h-full w-full items-center justify-center xl:flex"
+                    >
+                      <p className=" max-w-lg text-center font-Cinzel text-2xl md:max-w-2xl">
+                        {category.description}
+                      </p>
+                    </motion.div>
+                  ) : (
+                    <MenuItem item={selectedItem} />
+                  )}
+                </AnimatePresence>
               </AnimatePresence>
-            </AnimatePresence>
+            </div>
+            <div className="hidden h-auto min-h-[20vh] w-full  flex-initial lg:block ">
+              <MenuBottomBar
+                category={category}
+                setSelectedItem={(item) => setSelectedItem(item)}
+              />
+            </div>
           </div>
-          <div className="hidden h-auto min-h-[20vh] w-full  flex-initial lg:block ">
-            <MenuBottomBar
-              category={category}
-              setSelectedItem={(item) => setSelectedItem(item)}
-            />
-          </div>
-        </div>
-      </AnimateSharedLayout>
+        </AnimateSharedLayout>
+      </div>
     </Layout>
   )
 }

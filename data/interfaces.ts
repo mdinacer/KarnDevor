@@ -3,7 +3,6 @@ export interface MeatCategory {
     slug: string;
     title: string;
     logo: string;
-    image: string | null;
     video: string | null;
     items: CategoryItem[];
     description: string;

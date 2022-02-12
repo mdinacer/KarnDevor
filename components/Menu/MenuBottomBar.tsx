@@ -17,7 +17,7 @@ export default function MenuBottomBar({ setSelectedItem, category }: Props) {
             whileHover={{ scale: 1.3, y: -50 }}
             key={item.id}
             type="button"
-            className=""
+            className="w-auto"
             onClick={() => setSelectedItem(item)}
             title={item.title}
           >

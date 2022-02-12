@@ -1,34 +1,30 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
-import { CategoryItem, MeatCategory } from '../../data/interfaces'
+import { MeatCategory } from '../../data/interfaces'
 import HeroBottomBar from './HeroBottomBar'
 import HeroCategoryItem from './HeroCategoryItem'
 import HeroHeader from './HeroHeader'
-import MenuItem from '../Menu/MenuItem'
-import MenuBottomBar from '../Menu/MenuBottomBar'
 
 export default function Hero() {
   const [category, setCategory] = useState<MeatCategory | null>(null)
-  const [showDishes, setShowDishes] = useState(false)
-  const [dish, setDish] = useState<CategoryItem | null>(null)
 
   return (
-    <motion.div className="relative flex h-full min-h-screen w-full flex-col bg-[#000]">
-      <AnimatePresence>
+    <div className="relative flex h-full min-h-screen w-full flex-col bg-[#000]">
+      <AnimatePresence exitBeforeEnter>
         {!category?.video && (
           <motion.div
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             initial={{ opacity: 0 }}
             transition={{
-              duration: 1,
+              duration: 0.1,
             }}
             key="heroBg"
             className="absolute top-0 left-0  h-full w-full bg-[url('/assets/images/hero.webp')] bg-cover bg-center mix-blend-screen"
           />
         )}
       </AnimatePresence>
-      <AnimatePresence>
+      <AnimatePresence exitBeforeEnter>
         {category?.video && (
           <motion.video
             playsInline
@@ -49,7 +45,7 @@ export default function Hero() {
         )}
       </AnimatePresence>
 
-      <HeroHeader />
+      <HeroHeader logoVisible={category !== null} />
 
       <motion.div
         variants={container}
@@ -72,7 +68,7 @@ export default function Hero() {
               }}
               className=" flex h-full w-full items-center justify-center self-end pb-20 sm:self-center sm:pb-0"
             >
-              <div className=" text-white">
+              <motion.div layoutId="logoLayout" className=" text-white">
                 <h1 className="">
                   <span className="font-CinzelDeco text-7xl sm:text-9xl">
                     K
@@ -90,7 +86,7 @@ export default function Hero() {
                 <p className="text-center font-CinzelDeco text-base sm:-translate-y-6 sm:text-right sm:text-2xl">
                   Unleash the predator inside.
                 </p>
-              </div>
+              </motion.div>
             </motion.div>
           ) : (
             <HeroCategoryItem item={category} />
@@ -102,7 +98,7 @@ export default function Hero() {
           setCategory(item)
         }}
       />
-    </motion.div>
+    </div>
   )
 }
 

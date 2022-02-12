@@ -18,7 +18,7 @@ export default function HeroBottomBar({ setSelectedItem }: Props) {
         initial="hidden"
         animate="show"
         exit="exit"
-        className="relative mt-auto flex flex-row items-center   py-5 "
+        className="relative mt-auto flex flex-row items-center overflow-hidden py-5 "
       >
         {Categories.map((category) => (
           <motion.div
@@ -31,7 +31,7 @@ export default function HeroBottomBar({ setSelectedItem }: Props) {
                   : 'rgba(255,255,255,.05)',
             }}
             className={
-              'flex w-full flex-auto px-5 py-2 text-white backdrop-blur-md transition-all duration-700'
+              'flex w-full flex-auto py-2 text-white backdrop-blur-md transition-all duration-700 lg:px-5'
             }
           >
             <motion.button
@@ -46,19 +46,14 @@ export default function HeroBottomBar({ setSelectedItem }: Props) {
             >
               <motion.p
                 layoutId={`Hero${category.slug}`}
-                style={
-                  {
-                    //textAlign: selectedIndex === category.id ? 'center' : 'left',
-                  }
-                }
-                className=" w-full font-Oswald text-base  uppercase sm:text-2xl"
+                className=" w-auto font-Oswald text-base  uppercase sm:text-2xl"
               >
                 {category.title}
               </motion.p>
             </motion.button>
           </motion.div>
         ))}
-      </motion.div> 
+      </motion.div>
     </AnimatePresence>
   )
 }

@@ -1,4 +1,3 @@
-import { AnimatePresence, motion } from 'framer-motion'
 import Hero from '../components/hero/Hero'
 import Layout from '../components/Layout'
 

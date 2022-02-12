@@ -2,9 +2,7 @@ import '../styles/globals.css'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import { AnimatePresence } from 'framer-motion'
-import { url } from 'inspector'
 import { DefaultSeo } from 'next-seo'
-import Header from '../components/Header'
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   const url = `https://karndevor.netlify.app${router.route}`
@@ -14,6 +12,21 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         <link rel="icon" href="/favicon.ico" type="image/png" />
       </Head>
       <DefaultSeo
+        additionalLinkTags={[
+          {
+            rel: 'icon',
+            href: './favicon.ico',
+          },
+          {
+            rel: 'apple-touch-icon',
+            href: 'https://www.test.ie/apple-touch-icon.png',
+            sizes: '76x76',
+          },
+          {
+            rel: 'manifest',
+            href: '/site.webmanifest',
+          },
+        ]}
         titleTemplate="%s - KarnDevor"
         openGraph={{
           type: 'website',
@@ -21,7 +34,14 @@ function MyApp({ Component, pageProps, router }: AppProps) {
           url,
           description: 'Unleash the predator inside',
           site_name: 'KarnDevor | KarnDevor.com',
-          images: [],
+          images: [
+            {
+              url: './preview.jpg',
+              width: 1536,
+              height: 960,
+              alt: 'Og Image Alt',
+            },
+          ],
         }}
         canonical={url}
       />

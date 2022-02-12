@@ -194,7 +194,6 @@ export const Categories: MeatCategory[] = [
     title: 'Lamb',
     slug: 'lamb',
     logo: 'wolf.webp',
-    image: '/assets/images/menu/lamb/cover.webp',
     description: `We work with farmers who prefer things a little old-fashioned. If they raise sheep like the days of old, then that means we'll get along.`,
     video: '/assets/videos/lamb.mp4',
     items: lambItems,
@@ -204,7 +203,6 @@ export const Categories: MeatCategory[] = [
     slug: 'beef',
     title: 'Beef',
     logo: 'lion.webp',
-    image: '/assets/images/menu/beef/cover.webp',
     description:
       'Because cows are what they eat ... we offer the best grass-fed beef. No GMO-feed, antibiotics, or growth hormones, and we never compromise on quality.',
     video: '/assets/videos/beef.mp4',
@@ -215,7 +213,6 @@ export const Categories: MeatCategory[] = [
     slug: 'seafood',
     title: 'Seafood',
     logo: 'bear.webp',
-    image: '/assets/images/menu/seafood/cover.webp',
     description: `Our wild-caught seafood is so fresh and delicious you'll think you're eating this morning's catch right off the coast. Every bit of seafood we sell is supplied by Vital Choice and is certified sustainable and wild harvested. `,
     video: '/assets/videos/fish.mp4',
     items: seafoodItems,
@@ -225,7 +222,6 @@ export const Categories: MeatCategory[] = [
     slug: 'poultry',
     title: 'Poultry',
     logo: 'eagle.webp',
-    image: '/assets/images/menu/poultry/cover.webp',
     description:
       'Better pastures. Better birds. Better taste. Our pastured poultry are raised on family farms based right here in the United States.',
     video: '/assets/videos/poultry.mp4',
