@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react'
 import { NextSeo } from 'next-seo'
 import { motion } from 'framer-motion'
-import { QuickMenu, QuickMenuMobile } from './QuickMenu'
 
 type Props = {
   children: ReactNode
@@ -31,8 +30,6 @@ const Layout = ({ children, title, description }: Props): JSX.Element => (
       className="relative h-full w-full "
     >
       {children}
-      <QuickMenu />
-      <QuickMenuMobile />
     </motion.main>
   </div>
 )
